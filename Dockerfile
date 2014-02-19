@@ -43,5 +43,6 @@ ADD     start.sh /opt/
 
 EXPOSE  3306
 EXPOSE  22
+EXPOSE  80
 
 CMD     source /opt/start.sh
