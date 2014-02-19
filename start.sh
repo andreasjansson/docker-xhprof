@@ -27,6 +27,6 @@ echo "FLUSH PRIVILEGES" | mysql -uroot
 # create new user
 echo "GRANT ALL ON xhprof.* TO '$DB_USER'@'%' IDENTIFIED BY '$DB_PASS'" | mysql -uroot xhprof
 
-killall mysqld_safe
+mysqladmin -uroot shutdown
 
 supervisord -n

@@ -28,6 +28,7 @@ RUN     curl -L https://github.com/preinheimer/xhprof/tarball/3bbf52e | tar xz &
 ADD     config.php.tpl /opt/xhprof/xhprof_lib/
 ADD     vhost.conf.tpl /tmp/
 ADD     vhost_auth.conf.tpl /tmp/
+RUN     rm /etc/apache2/sites-enabled/000-default
 
 ADD     schema.sql /tmp/
 
