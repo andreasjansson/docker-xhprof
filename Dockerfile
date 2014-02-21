@@ -30,6 +30,7 @@ ADD     vhost.conf.tpl /tmp/
 ADD     vhost_auth.conf.tpl /tmp/
 RUN     rm /etc/apache2/sites-enabled/000-default
 
+ADD     my.cnf /etc/mysql/my.cnf
 ADD     schema.sql /tmp/
 
 # setup sshd with root:root
@@ -40,10 +41,11 @@ ADD     supervisord.conf /etc/
 
 RUN     pip install envtpl
 
-ADD     start.sh /opt/
+ADD     start.sh /bin/
+RUN     chmod +x /bin/start.sh
 
 EXPOSE  3306
 EXPOSE  22
 EXPOSE  80
 
-CMD     source /opt/start.sh
+CMD     /bin/start.sh
