@@ -25,10 +25,10 @@ RUN     curl -L https://github.com/preinheimer/xhprof/tarball/3bbf52e | tar xz &
             make && \
             make install
 
-# add some template confs
+# add some confs
 ADD     config.php.tpl /opt/xhprof/xhprof_lib/
-ADD     vhost.conf.tpl /tmp/
-ADD     vhost_auth.conf.tpl /tmp/
+ADD     vhost.conf /tmp/
+ADD     vhost_auth.conf /tmp/
 RUN     rm /etc/apache2/sites-enabled/000-default
 
 ADD     my.cnf /etc/mysql/my.cnf
@@ -40,13 +40,13 @@ RUN     echo 'root:root' | chpasswd
 
 ADD     supervisord.conf /etc/
 
-RUN     pip install envtpl
+RUN     pip install envtpl==0.2.0
 
 ADD     start.sh /bin/
 RUN     chmod +x /bin/start.sh
 
-EXPOSE  3306
 EXPOSE  22
 EXPOSE  80
+EXPOSE  3306
 
 CMD     /bin/start.sh

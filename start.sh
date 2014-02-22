@@ -2,14 +2,15 @@
 
 envtpl -f /opt/xhprof/xhprof_lib/config.php.tpl || exit 1
 
-if [ -z "$HTTP_AUTH_USER"]
+if [ "$HTTP_AUTH_USER" ]
 then
-    envtpl -f /tmp/vhost.conf.tpl -o /etc/apache2/sites-enabled/xhprof.conf || exit 1
-else
     htpasswd -cb /etc/apache2/htpasswd "$HTTP_AUTH_USER" "$HTTP_AUTH_PASS"
-    envtpl -f /tmp/vhost_auth.conf.tpl -o /etc/apache2/sites-enabled/xhprof.conf || exit 1
+    mv /tmp/vhost_auth.conf /etc/apache2/sites-enabled/xhprof.conf
+else
+    mv /tmp/vhost.conf /etc/apache2/sites-enabled/xhprof.conf
 fi
 
+# start mysql in background so we can create db user etc.
 mysqld_safe &
 while ! nc -zv localhost 3306
 do

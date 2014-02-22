@@ -8,9 +8,7 @@ $_xhprof['dbuser'] = '{{ DB_USER }}';
 $_xhprof['dbpass'] = '{{ DB_PASS }}';
 $_xhprof['dbname'] = 'xhprof';
 $_xhprof['dbadapter'] = 'Pdo';
-$_xhprof['servername'] = 'myserver';
 $_xhprof['namespace'] = 'myapp';
-$_xhprof['url'] = 'http://{{ HOSTNAME }}';
 /*
  * MySQL/MySQLi/PDO ONLY
  * Switch to JSON for better performance and support for larger profiler data sets.
