@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eu
+set -e
 
 # render config templates
 envtpl -f /opt/xhprof/xhprof_lib/config.php.tpl
@@ -9,6 +9,8 @@ envtpl /etc/apache2/sites-enabled/xhprof.conf.tpl
 if [ "$HTTP_AUTH_USER"]
     htpasswd -cb /etc/apache2/htpasswd "$HTTP_AUTH_USER" "$HTTP_AUTH_PASS"
 fi
+
+set -eu
 
 # start mysql in the background while we create user accounts
 mysqld_safe &
