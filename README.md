@@ -16,7 +16,7 @@ Docker stuff
   - XHProf database username, **required**
 
 * DB_PASS
-  - XHProf database password **required**
+  - XHProf database password, **required**
 
 * HTTP_AUTH_USER
   - HTTP authentication username (optional)

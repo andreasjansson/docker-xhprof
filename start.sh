@@ -1,15 +1,16 @@
 #!/bin/bash
 
-envtpl -f /opt/xhprof/xhprof_lib/config.php.tpl || exit 1
+set -eu
 
-if [ -z "$HTTP_AUTH_USER"]
-then
-    envtpl -f /tmp/vhost.conf.tpl -o /etc/apache2/sites-enabled/xhprof.conf || exit 1
-else
+# render config templates
+envtpl -f /opt/xhprof/xhprof_lib/config.php.tpl
+envtpl /etc/apache2/sites-enabled/xhprof.conf.tpl
+
+if [ "$HTTP_AUTH_USER"]
     htpasswd -cb /etc/apache2/htpasswd "$HTTP_AUTH_USER" "$HTTP_AUTH_PASS"
-    envtpl -f /tmp/vhost_auth.conf.tpl -o /etc/apache2/sites-enabled/xhprof.conf || exit 1
 fi
 
+# start mysql in the background while we create user accounts
 mysqld_safe &
 while ! nc -zv localhost 3306
 do
