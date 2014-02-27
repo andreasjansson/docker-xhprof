@@ -26,8 +26,8 @@ RUN     curl -L https://github.com/preinheimer/xhprof/tarball/3bbf52e | tar xz &
             make install
 
 # add some confs
+ADD     xhprof_vhost.conf.tpl /etc/apache2/sites-enabled/
 ADD     config.php.tpl /opt/xhprof/xhprof_lib/
-ADD     vhost.conf.tpl /etc/apache2/sites-enabled/
 RUN     rm /etc/apache2/sites-enabled/000-default
 
 ADD     my.cnf /etc/mysql/
@@ -39,7 +39,7 @@ RUN     echo 'root:root' | chpasswd
 
 ADD     supervisord.conf /etc/
 
-RUN     pip install envtpl==0.2.0
+RUN     pip install envtpl==0.2.1
 
 ADD     start.sh /bin/
 RUN     chmod +x /bin/start.sh

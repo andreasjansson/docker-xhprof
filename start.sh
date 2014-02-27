@@ -3,12 +3,10 @@
 set -e
 
 # render config templates
-envtpl -f /opt/xhprof/xhprof_lib/config.php.tpl
-envtpl /etc/apache2/sites-enabled/xhprof.conf.tpl
+envtpl /opt/xhprof/xhprof_lib/config.php.tpl
+envtpl /etc/apache2/sites-enabled/xhprof_vhost.conf.tpl
 
-if [ "$HTTP_AUTH_USER"]
-    htpasswd -cb /etc/apache2/htpasswd "$HTTP_AUTH_USER" "$HTTP_AUTH_PASS"
-fi
+[ -n "$HTTP_AUTH_USER" ] && htpasswd -cb /etc/apache2/htpasswd "$HTTP_AUTH_USER" "$HTTP_AUTH_PASS"
 
 set -eu
 
