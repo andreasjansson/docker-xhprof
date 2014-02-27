@@ -1,7 +1,7 @@
 Docker-XHProf
 =============
 
-Docker image created from [preinheimer/xhprof](https://github.com/preinheimer/xhprof).
+Docker image created from [preinheimer/xhprof](https://github.com/preinheimer/xhprof). Trusted build at https://index.docker.io/u/andreasjansson/docker-xhprof/, pull from andreasjansson/docker-xhprof.
 
 XHProf is a really nice PHP profiling tool developed by Facebook. P Reinheimer's patch adds a GUI with customisable backends.
 
