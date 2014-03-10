@@ -37,7 +37,7 @@ ADD     schema.sql /tmp/
 RUN	mkdir /var/run/sshd
 RUN     echo 'root:root' | chpasswd
 
-ADD     supervisord.conf /etc/
+ADD     supervisord.conf /etc/supervisor/supervisord.conf
 
 RUN     pip install envtpl==0.2.1
 
