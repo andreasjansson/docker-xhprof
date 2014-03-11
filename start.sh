@@ -18,17 +18,17 @@ do
 done
 
 # create db and table
-echo "CREATE DATABASE xhprof" | mysql -uroot
-mysql -uroot xhprof < /tmp/schema.sql
+echo "CREATE DATABASE xhprof" | mysql
+mysql xhprof < /tmp/schema.sql
 
 # disalbe remote root login
-echo "DELETE FROM user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1')" | mysql -uroot mysql
-echo "FLUSH PRIVILEGES" | mysql -uroot
+echo "DELETE FROM user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1')" | mysql mysql
+echo "FLUSH PRIVILEGES" | mysql
 
 # create new user
-echo "GRANT ALL ON xhprof.* TO '$DB_USER'@'%' IDENTIFIED BY '$DB_PASS'" | mysql -uroot xhprof
-echo "GRANT ALL ON xhprof.* TO '$DB_USER'@'localhost' IDENTIFIED BY '$DB_PASS'" | mysql -uroot xhprof
+echo "GRANT ALL ON xhprof.* TO '$DB_USER'@'%' IDENTIFIED BY '$DB_PASS'" | mysql xhprof
+echo "GRANT ALL ON xhprof.* TO '$DB_USER'@'localhost' IDENTIFIED BY '$DB_PASS'" | mysql xhprof
 
-mysqladmin -uroot shutdown
+mysqladmin shutdown
 
 supervisord -n
